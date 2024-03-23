@@ -3,10 +3,17 @@ using MinhaApi.Domain.Entities;
 
 namespace MinhaApi.Infra.Repositories;
 
-public class ProdutoPgRepository : ProdutoRepository
+public class ProdutoPgRepository : IProdutoRepository
 {
-    public Task<IList<Produto>> ListAsync()
+    public IList<Produto> List()
     {
-        throw new NotImplementedException();
+        IList<Produto> list = new List<Produto>();
+        Produto produto = new Produto
+        {
+            ProdutoId = 1,
+            Nome = "Teste"
+        };
+        list.Add(produto);
+        return list;
     }
 }

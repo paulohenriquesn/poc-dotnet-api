@@ -1,0 +1,17 @@
+using MinhaApi.Domain;
+using MinhaApi.Domain.Entities;
+using MinhaApi.MinhaApi.Domain.UseCases.Produtos;
+
+namespace MinhaApi.Application.UseCases.Produtos;
+
+public class RetrieveAll : IRetrieveAll
+{
+    private IProdutoRepository _produtoRepository;
+    public RetrieveAll(IProdutoRepository produtoRepository) {
+        _produtoRepository = produtoRepository;
+    }
+    
+    public async Task<IList<Produto>> Handler() {
+        return _produtoRepository.List();
+    }
+}

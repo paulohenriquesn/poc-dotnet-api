@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinhaApi.Domain", "MinhaApi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinhaApi.Infra", "MinhaApi.Infra\MinhaApi.Infra.csproj", "{23287C42-D7BD-4A68-87A6-99610CE8145D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinhaApi.Application", "MinhaApi.Application\MinhaApi.Application.csproj", "{D9721E44-DE1B-42A5-9319-9528DBCBA797}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{23287C42-D7BD-4A68-87A6-99610CE8145D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23287C42-D7BD-4A68-87A6-99610CE8145D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23287C42-D7BD-4A68-87A6-99610CE8145D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9721E44-DE1B-42A5-9319-9528DBCBA797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9721E44-DE1B-42A5-9319-9528DBCBA797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9721E44-DE1B-42A5-9319-9528DBCBA797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9721E44-DE1B-42A5-9319-9528DBCBA797}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

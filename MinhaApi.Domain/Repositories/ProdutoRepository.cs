@@ -2,7 +2,7 @@
 
 namespace MinhaApi.Domain;
 
-public interface ProdutoRepository
+public interface IProdutoRepository
 {
-    Task<IList<Produto>> ListAsync();
+    IList<Produto> List();
 }
