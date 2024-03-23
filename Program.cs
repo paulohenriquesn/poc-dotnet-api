@@ -20,6 +20,7 @@ builder.Services.AddScoped<IRetrieveAll, RetrieveAll>();
 builder.Services.AddScoped<IRetrieveById, RetrieveById>();
 builder.Services.AddScoped<ICreateProduct, CreateProduct>();
 builder.Services.AddScoped<IDeleteProduct, DeleteProduct>();
+builder.Services.AddScoped<IUpdateProduct, UpdateProduct>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoPgRepository>();
 
 var app = builder.Build();

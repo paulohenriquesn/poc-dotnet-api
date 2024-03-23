@@ -33,4 +33,12 @@ public class ProdutoPgRepository : IProdutoRepository
         _context.Produtos.Remove(new Produto(){ProdutoId = id});
        await _context.SaveChangesAsync();
     }
+
+    public async Task Update(int Id, Produto product) {
+        await _context.Produtos.Where(p => p.ProdutoId == Id).ExecuteUpdateAsync(setters => 
+        setters
+        .SetProperty(p => p.Nome, product.Nome)
+        .SetProperty(p => p.ImagemUrl, product.ImagemUrl));
+        await _context.SaveChangesAsync();
+    }
 }

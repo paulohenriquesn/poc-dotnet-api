@@ -11,4 +11,6 @@ public interface IProdutoRepository
     Task Save(Produto product);
 
     Task Delete(int Id);
+
+    Task Update(int Id, Produto product);
 }

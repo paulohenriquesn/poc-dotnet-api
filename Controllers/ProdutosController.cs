@@ -12,8 +12,8 @@ public class ProdutosController : ControllerBase
     private readonly IRetrieveAll _RetrieveAllUseCase;
     private readonly IRetrieveById _RetrieveByIdUseCase;
     private readonly ICreateProduct _CreateProductUseCase;
-
     private readonly IDeleteProduct _DeleteProductUseCase;
+    private readonly IUpdateProduct _UpdateProductUseCase;
     private readonly ILogger<ProdutosController> _log;
 
     public ProdutosController(
@@ -21,12 +21,13 @@ public class ProdutosController : ControllerBase
         IRetrieveAll RetrieveAllUseCase,
         IRetrieveById RetrieveByIdUseCase,
         ICreateProduct CreateProductUseCase,
-        IDeleteProduct DeleteProductUseCase) {
+        IDeleteProduct DeleteProductUseCase,
+        IUpdateProduct updateProductUseCase) {
         _RetrieveAllUseCase = RetrieveAllUseCase;
         _RetrieveByIdUseCase = RetrieveByIdUseCase;
         _CreateProductUseCase = CreateProductUseCase;
         _DeleteProductUseCase = DeleteProductUseCase;
-
+        _UpdateProductUseCase = updateProductUseCase;
         _log = log;
     }
 
@@ -66,6 +67,16 @@ public class ProdutosController : ControllerBase
     public async Task<IActionResult> Delete(int id) {
         try {
         await _DeleteProductUseCase.Handler(id);
+        return Ok();
+        }catch {
+            return UnprocessableEntity();
+        }
+    }
+
+    [HttpPut("produtos/{id}")]
+    public async Task<IActionResult> Update(int id, [FromBody] Produto product) {
+        try {
+        await _UpdateProductUseCase.Handler(id, product);
         return Ok();
         }catch {
             return UnprocessableEntity();
