@@ -1,19 +1,19 @@
 using MinhaApi.Domain;
 using MinhaApi.Domain.Entities;
+using MinhaApi.Infra.Databases;
 
 namespace MinhaApi.Infra.Repositories;
 
 public class ProdutoPgRepository : IProdutoRepository
 {
-    public IList<Produto> List()
+    private readonly AppDbContext _context;
+    
+    public ProdutoPgRepository(AppDbContext context) {
+        _context = context;
+    }
+    public IEnumerable<Produto> List()
     {
-        IList<Produto> list = new List<Produto>();
-        Produto produto = new Produto
-        {
-            ProdutoId = 1,
-            Nome = "Teste"
-        };
-        list.Add(produto);
-        return list;
+        var products = _context.Produtos.ToList();
+        return products;
     }
 }

@@ -15,9 +15,8 @@ builder.Services.AddMvc();
 string PgConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(PgConnection));
-
-builder.Services.AddSingleton<IRetrieveAll, RetrieveAll>();
-builder.Services.AddSingleton<IProdutoRepository, ProdutoPgRepository>();
+builder.Services.AddScoped<IRetrieveAll, RetrieveAll>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoPgRepository>();
 
 var app = builder.Build();
 

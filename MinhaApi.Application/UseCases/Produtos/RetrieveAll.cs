@@ -1,3 +1,4 @@
+using System.Collections;
 using MinhaApi.Domain;
 using MinhaApi.Domain.Entities;
 using MinhaApi.MinhaApi.Domain.UseCases.Produtos;
@@ -11,7 +12,7 @@ public class RetrieveAll : IRetrieveAll
         _produtoRepository = produtoRepository;
     }
     
-    public async Task<IList<Produto>> Handler() {
+    public async Task<IEnumerable<Produto>> Handler() {
         return _produtoRepository.List();
     }
 }

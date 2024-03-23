@@ -19,6 +19,10 @@ public class ProdutosController : ControllerBase
     [HttpGet("produtos")]
     public async Task<IActionResult> RetrieveAll() {
         _log.LogInformation("Retrieve all Produtos");
-        return Ok(await _RetrieveAllUseCase.Handler());
+        var products = await _RetrieveAllUseCase.Handler();
+        if (products == null) {
+            return NotFound();
+        }
+        return Ok(products);
     }
 }

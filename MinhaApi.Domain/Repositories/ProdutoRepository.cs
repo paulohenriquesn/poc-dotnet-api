@@ -4,5 +4,5 @@ namespace MinhaApi.Domain;
 
 public interface IProdutoRepository
 {
-    IList<Produto> List();
+    IEnumerable<Produto> List();
 }
