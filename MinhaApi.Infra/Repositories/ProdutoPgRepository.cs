@@ -14,7 +14,7 @@ public class ProdutoPgRepository : IProdutoRepository
     }
     public async Task<IEnumerable<Produto>> List()
     {
-        var products = await _context.Produtos.ToListAsync();
+        var products = await _context.Produtos.AsNoTracking().ToListAsync();
         return products;
     }
 

@@ -9,32 +9,17 @@ namespace MinhaApi.Controllers;
 [Route("api")]
 public class ProdutosController : ControllerBase
 {
-    private readonly IRetrieveAll _RetrieveAllUseCase;
-    private readonly IRetrieveById _RetrieveByIdUseCase;
-    private readonly ICreateProduct _CreateProductUseCase;
-    private readonly IDeleteProduct _DeleteProductUseCase;
-    private readonly IUpdateProduct _UpdateProductUseCase;
     private readonly ILogger<ProdutosController> _log;
 
     public ProdutosController(
-        ILogger<ProdutosController> log, 
-        IRetrieveAll RetrieveAllUseCase,
-        IRetrieveById RetrieveByIdUseCase,
-        ICreateProduct CreateProductUseCase,
-        IDeleteProduct DeleteProductUseCase,
-        IUpdateProduct updateProductUseCase) {
-        _RetrieveAllUseCase = RetrieveAllUseCase;
-        _RetrieveByIdUseCase = RetrieveByIdUseCase;
-        _CreateProductUseCase = CreateProductUseCase;
-        _DeleteProductUseCase = DeleteProductUseCase;
-        _UpdateProductUseCase = updateProductUseCase;
+        ILogger<ProdutosController> log) {
         _log = log;
     }
 
     [HttpGet("produtos")]
-    public async Task<IActionResult> RetrieveAll() {
+    public async Task<IActionResult> RetrieveAll(IRetrieveAll UseCase) {
         _log.LogInformation("Retrieve all Produtos");
-        var products = await _RetrieveAllUseCase.Handler();
+        var products = await UseCase.Handler();
         if (products == null) {
             return NotFound();
         }
@@ -42,9 +27,9 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpGet("produtos/{id}")]
-    public async Task<IActionResult> RetrieveById(int id) {
+    public async Task<IActionResult> RetrieveById(IRetrieveById UseCase, int id) {
         _log.LogInformation($"Retrieve Produto ${id} By Id");
-        var product = await _RetrieveByIdUseCase.Handler(id);
+        var product = await UseCase.Handler(id);
         
         if(product == null) {
             return NotFound();
@@ -54,9 +39,9 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpPost("produtos")]
-    public async Task<IActionResult> Save([FromBody] Produto product) {
+    public async Task<IActionResult> Save(ICreateProduct UseCase, [FromBody] Produto product) {
         try {
-        await _CreateProductUseCase.Handler(product);
+        await UseCase.Handler(product);
         return Created();
         }catch {
             return UnprocessableEntity();
@@ -64,9 +49,9 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpDelete("produtos/{id}")]
-    public async Task<IActionResult> Delete(int id) {
+    public async Task<IActionResult> Delete(IDeleteProduct UseCase, int id) {
         try {
-        await _DeleteProductUseCase.Handler(id);
+        await UseCase.Handler(id);
         return Ok();
         }catch {
             return UnprocessableEntity();
@@ -74,9 +59,9 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpPut("produtos/{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] Produto product) {
+    public async Task<IActionResult> Update(IUpdateProduct UseCase, int id, [FromBody] Produto product) {
         try {
-        await _UpdateProductUseCase.Handler(id, product);
+        await UseCase.Handler(id, product);
         return Ok();
         }catch {
             return UnprocessableEntity();
