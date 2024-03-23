@@ -11,18 +11,21 @@ public class ProdutosController : ControllerBase
 {
     private readonly IRetrieveAll _RetrieveAllUseCase;
     private readonly IRetrieveById _RetrieveByIdUseCase;
-
     private readonly ICreateProduct _CreateProductUseCase;
+
+    private readonly IDeleteProduct _DeleteProductUseCase;
     private readonly ILogger<ProdutosController> _log;
 
     public ProdutosController(
         ILogger<ProdutosController> log, 
         IRetrieveAll RetrieveAllUseCase,
         IRetrieveById RetrieveByIdUseCase,
-        ICreateProduct CreateProductUseCase) {
+        ICreateProduct CreateProductUseCase,
+        IDeleteProduct DeleteProductUseCase) {
         _RetrieveAllUseCase = RetrieveAllUseCase;
         _RetrieveByIdUseCase = RetrieveByIdUseCase;
         _CreateProductUseCase = CreateProductUseCase;
+        _DeleteProductUseCase = DeleteProductUseCase;
 
         _log = log;
     }
@@ -54,6 +57,16 @@ public class ProdutosController : ControllerBase
         try {
         await _CreateProductUseCase.Handler(product);
         return Created();
+        }catch {
+            return UnprocessableEntity();
+        }
+    }
+
+    [HttpDelete("produtos/{id}")]
+    public async Task<IActionResult> Delete(int id) {
+        try {
+        await _DeleteProductUseCase.Handler(id);
+        return Ok();
         }catch {
             return UnprocessableEntity();
         }

@@ -9,4 +9,6 @@ public interface IProdutoRepository
     Task<Produto> getById(int Id);
     
     Task Save(Produto product);
+
+    Task Delete(int Id);
 }

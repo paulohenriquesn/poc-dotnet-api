@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MinhaApi.Application;
 using MinhaApi.Application.UseCases.Produtos;
 using MinhaApi.Domain;
 using MinhaApi.Infra.Databases;
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(PgConne
 builder.Services.AddScoped<IRetrieveAll, RetrieveAll>();
 builder.Services.AddScoped<IRetrieveById, RetrieveById>();
 builder.Services.AddScoped<ICreateProduct, CreateProduct>();
+builder.Services.AddScoped<IDeleteProduct, DeleteProduct>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoPgRepository>();
 
 var app = builder.Build();

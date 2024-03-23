@@ -28,4 +28,9 @@ public class ProdutoPgRepository : IProdutoRepository
         await _context.Produtos.AddAsync(product);
         await _context.SaveChangesAsync();
     }
+
+    public async Task Delete(int id) {
+        _context.Produtos.Remove(new Produto(){ProdutoId = id});
+       await _context.SaveChangesAsync();
+    }
 }
