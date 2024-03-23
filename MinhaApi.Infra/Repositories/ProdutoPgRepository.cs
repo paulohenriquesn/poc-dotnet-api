@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using MinhaApi.Domain;
 using MinhaApi.Domain.Entities;
 using MinhaApi.Infra.Databases;
@@ -11,15 +12,20 @@ public class ProdutoPgRepository : IProdutoRepository
     public ProdutoPgRepository(AppDbContext context) {
         _context = context;
     }
-    public IEnumerable<Produto> List()
+    public async Task<IEnumerable<Produto>> List()
     {
-        var products = _context.Produtos.ToList();
+        var products = await _context.Produtos.ToListAsync();
         return products;
     }
 
-    public Produto getById(int Id)
+    public async Task<Produto> getById(int Id)
     {
-        var product = _context.Produtos.FirstOrDefault(p => p.ProdutoId == Id);
+        var product = await _context.Produtos.FirstOrDefaultAsync(p => p.ProdutoId == Id);
         return product;
+    }
+
+    public async Task Save(Produto product) {
+        await _context.Produtos.AddAsync(product);
+        await _context.SaveChangesAsync();
     }
 }

@@ -4,7 +4,9 @@ namespace MinhaApi.Domain;
 
 public interface IProdutoRepository
 {
-    IEnumerable<Produto> List();
+    Task<IEnumerable<Produto>> List();
 
-    Produto getById(int Id);
+    Task<Produto> getById(int Id);
+    
+    Task Save(Produto product);
 }

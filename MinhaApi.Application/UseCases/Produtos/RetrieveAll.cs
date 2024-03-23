@@ -13,6 +13,6 @@ public class RetrieveAll : IRetrieveAll
     }
     
     public async Task<IEnumerable<Produto>> Handler() {
-        return _produtoRepository.List();
+        return await _produtoRepository.List();
     }
 }

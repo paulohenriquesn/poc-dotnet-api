@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using MinhaApi.Application.UseCases.Produtos;
+using MinhaApi.Domain;
+using MinhaApi.Domain.Entities;
 using MinhaApi.MinhaApi.Domain.UseCases.Produtos;
 
 namespace MinhaApi.Controllers;
@@ -10,14 +11,18 @@ public class ProdutosController : ControllerBase
 {
     private readonly IRetrieveAll _RetrieveAllUseCase;
     private readonly IRetrieveById _RetrieveByIdUseCase;
+
+    private readonly ICreateProduct _CreateProductUseCase;
     private readonly ILogger<ProdutosController> _log;
 
     public ProdutosController(
         ILogger<ProdutosController> log, 
         IRetrieveAll RetrieveAllUseCase,
-        IRetrieveById RetrieveByIdUseCase) {
+        IRetrieveById RetrieveByIdUseCase,
+        ICreateProduct CreateProductUseCase) {
         _RetrieveAllUseCase = RetrieveAllUseCase;
         _RetrieveByIdUseCase = RetrieveByIdUseCase;
+        _CreateProductUseCase = CreateProductUseCase;
 
         _log = log;
     }
@@ -42,5 +47,15 @@ public class ProdutosController : ControllerBase
         }
 
         return Ok(product);
+    }
+
+    [HttpPost("produtos")]
+    public async Task<IActionResult> Save([FromBody] Produto product) {
+        try {
+        await _CreateProductUseCase.Handler(product);
+        return Created();
+        }catch {
+            return UnprocessableEntity();
+        }
     }
 }   

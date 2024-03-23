@@ -12,6 +12,6 @@ public class RetrieveById : IRetrieveById
     }
     
     public async Task<Produto> Handler(int Id) {
-        return _produtoRepository.getById(Id);
+        return await _produtoRepository.getById(Id);
     }
 }

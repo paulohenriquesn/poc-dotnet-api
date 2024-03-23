@@ -16,5 +16,4 @@ public class Produto
     public DateTime DataCadastro {get; set;}
     [Required]
     public int CategoriaId {get; set;}
-    public Categoria Categoria {get; set; }
-}
+}   
