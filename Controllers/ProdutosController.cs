@@ -9,10 +9,16 @@ namespace MinhaApi.Controllers;
 public class ProdutosController : ControllerBase
 {
     private readonly IRetrieveAll _RetrieveAllUseCase;
+    private readonly IRetrieveById _RetrieveByIdUseCase;
     private readonly ILogger<ProdutosController> _log;
 
-    public ProdutosController(ILogger<ProdutosController> log, IRetrieveAll RetrieveAllUseCase) {
+    public ProdutosController(
+        ILogger<ProdutosController> log, 
+        IRetrieveAll RetrieveAllUseCase,
+        IRetrieveById RetrieveByIdUseCase) {
         _RetrieveAllUseCase = RetrieveAllUseCase;
+        _RetrieveByIdUseCase = RetrieveByIdUseCase;
+
         _log = log;
     }
 
@@ -25,4 +31,16 @@ public class ProdutosController : ControllerBase
         }
         return Ok(products);
     }
-}
+
+    [HttpGet("produtos/{id}")]
+    public async Task<IActionResult> RetrieveById(int id) {
+        _log.LogInformation($"Retrieve Produto ${id} By Id");
+        var product = await _RetrieveByIdUseCase.Handler(id);
+        
+        if(product == null) {
+            return NotFound();
+        }
+
+        return Ok(product);
+    }
+}   

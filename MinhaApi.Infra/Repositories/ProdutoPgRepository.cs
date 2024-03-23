@@ -16,4 +16,10 @@ public class ProdutoPgRepository : IProdutoRepository
         var products = _context.Produtos.ToList();
         return products;
     }
+
+    public Produto getById(int Id)
+    {
+        var product = _context.Produtos.FirstOrDefault(p => p.ProdutoId == Id);
+        return product;
+    }
 }
