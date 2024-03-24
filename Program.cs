@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MinhaApi.Application;
 using MinhaApi.Application.UseCases.Produtos;
 using MinhaApi.Domain;
+using MinhaApi.Infra;
 using MinhaApi.Infra.Databases;
 using MinhaApi.Infra.Repositories;
 using MinhaApi.MinhaApi.Domain.UseCases.Produtos;
@@ -22,6 +23,7 @@ builder.Services.AddScoped<ICreateProduct, CreateProduct>();
 builder.Services.AddScoped<IDeleteProduct, DeleteProduct>();
 builder.Services.AddScoped<IUpdateProduct, UpdateProduct>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoPgRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 

@@ -5,14 +5,15 @@ namespace MinhaApi.Application;
 
 public class UpdateProduct : IUpdateProduct
 {
-    private readonly IProdutoRepository _produtoRepository;
+    private readonly IUnitOfWork _unitRepository;
 
-    public UpdateProduct(IProdutoRepository produtoRepository)
+    public UpdateProduct(IUnitOfWork unitRepository)
     {
-        _produtoRepository = produtoRepository;
+        _unitRepository = unitRepository;
     }
 
     public async Task Handler(int Id, Produto product) {
-        await _produtoRepository.Update(Id, product);
+        await _unitRepository.ProdutoRepository.Update(Id, product);
+        await _unitRepository.Commit();
     }
 }

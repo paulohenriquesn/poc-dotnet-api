@@ -4,12 +4,13 @@ namespace MinhaApi.Domain;
 
 public class CreateProduct : ICreateProduct
 {
-    private IProdutoRepository _produtoRepository;
-    public CreateProduct(IProdutoRepository produtoRepository) {
-        _produtoRepository = produtoRepository;
+    private IUnitOfWork _unitRepository;
+    public CreateProduct(IUnitOfWork unitRepository) {
+        _unitRepository = unitRepository;
     }
 
     public async Task Handler(Produto product) {
-        await _produtoRepository.Save(product);
+        await _unitRepository.ProdutoRepository.Save(product);
+        await _unitRepository.Commit();
     }
 }

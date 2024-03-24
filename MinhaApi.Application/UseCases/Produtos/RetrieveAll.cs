@@ -7,12 +7,12 @@ namespace MinhaApi.Application.UseCases.Produtos;
 
 public class RetrieveAll : IRetrieveAll
 {
-    private IProdutoRepository _produtoRepository;
-    public RetrieveAll(IProdutoRepository produtoRepository) {
-        _produtoRepository = produtoRepository;
+    private IUnitOfWork _unitRepository;
+    public RetrieveAll(IUnitOfWork unitRepository) {
+        _unitRepository = unitRepository;
     }
     
     public async Task<IEnumerable<Produto>> Handler() {
-        return await _produtoRepository.List();
+        return await _unitRepository.ProdutoRepository.List();
     }
 }

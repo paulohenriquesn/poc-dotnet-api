@@ -6,12 +6,12 @@ namespace MinhaApi.Application.UseCases.Produtos;
 
 public class RetrieveById : IRetrieveById
 {
-    private IProdutoRepository _produtoRepository;
-    public RetrieveById(IProdutoRepository produtoRepository) {
-        _produtoRepository = produtoRepository;
+    private IUnitOfWork _unitRepository;
+    public RetrieveById(IUnitOfWork unitRepository) {
+        _unitRepository = unitRepository;
     }
     
     public async Task<Produto> Handler(int Id) {
-        return await _produtoRepository.getById(Id);
+        return await _unitRepository.ProdutoRepository.getById(Id);
     }
 }

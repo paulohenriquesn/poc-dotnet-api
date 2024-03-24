@@ -4,13 +4,14 @@ namespace MinhaApi.Application;
 
 public class DeleteProduct : IDeleteProduct
 {
-    private IProdutoRepository _produtoRepository;
+    private IUnitOfWork _unitRepository;
 
-    public DeleteProduct(IProdutoRepository produtoRepository) {
-        _produtoRepository = produtoRepository;
+    public DeleteProduct(IUnitOfWork unitRepository) {
+        _unitRepository = unitRepository;
     }
     
     public async Task Handler(int id) {
-        await _produtoRepository.Delete(id);
+        await _unitRepository.ProdutoRepository.Delete(id);
+        await _unitRepository.Commit();
     }
 }
