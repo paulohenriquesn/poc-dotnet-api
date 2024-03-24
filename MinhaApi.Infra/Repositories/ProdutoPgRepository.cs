@@ -39,3 +39,4 @@ public class ProdutoPgRepository : IProdutoRepository
         .SetProperty(p => p.ImagemUrl, product.ImagemUrl));
     }
 }
+    

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MinhaApi;
 using MinhaApi.Application;
 using MinhaApi.Application.UseCases.Produtos;
 using MinhaApi.Domain;
@@ -13,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMvc();
+builder.Services.AddAutoMapper(typeof(Program));
 
 string PgConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -24,6 +26,7 @@ builder.Services.AddScoped<IDeleteProduct, DeleteProduct>();
 builder.Services.AddScoped<IUpdateProduct, UpdateProduct>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoPgRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
 var app = builder.Build();
 
